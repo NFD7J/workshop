@@ -12,7 +12,7 @@ class Dbconnect
     const SERVER = "localhost";
     const USER = "root";
     const PASSWORD = "";
-    const BASE = "gestion_de_projet_mvc";
+    const BASE = "workshop";
 
     public function __construct()
     {

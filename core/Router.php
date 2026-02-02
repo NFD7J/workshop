@@ -14,7 +14,7 @@ class Router
                 (isset($_GET)) ? $controller->$action($_GET) : $controller->$action();
             }else{
                 http_response_code(404);
-                echo "La page recherchée n'existe pas";
+                echo "La méthode recherchée n'existe pas";
             }
         }else{
             http_response_code(404);

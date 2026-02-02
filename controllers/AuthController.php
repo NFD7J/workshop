@@ -8,6 +8,7 @@ class AuthController extends Controller
 
     public function index()
     {
+        isset($_SESSION["user"]) ? header("location: index.php") : "";
         if(isset($_POST["email"]) && isset($_POST["password"])){
 
             if(!empty($_POST["email"]) && !empty($_POST["password"])){
@@ -23,7 +24,7 @@ class AuthController extends Controller
                         "name" => $role->nom,
                         "id" => $role->id_user
                     ];
-                    header("location: index.php?controller=project");
+                    header("location: index.php");
                 }else{
                     $error = "Email ou mot de passe incorrect";
                     $this->render("authentification/login", ["error" => $error]);

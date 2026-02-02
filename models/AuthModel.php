@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace App\models;
 use App\entities\User;
 use App\core\Dbconnect;
 
@@ -7,7 +7,7 @@ class AuthModel extends Dbconnect
 {
     public function login(User $user)
     {
-        $this->request = $this->connection->prepare("SELECT * FROM user WHERE email = :email AND password = :password");
+        $this->request = $this->connection->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
         $this->request->execute([
             "email" => $user->getEmail(),
             "password" => $user->getPassword()
@@ -22,7 +22,7 @@ class AuthModel extends Dbconnect
 
     public function register(User $user)
     {
-        $this->request = $this->connection->prepare("INSERT INTO user (nom, email, password, id_role) VALUES (:name, :email, :password, :role)");
+        $this->request = $this->connection->prepare("INSERT INTO users (name, email, password, roles_id) VALUES (:name, :email, :password, :role)");
         $this->request->execute([
             "name" => $user->getName(),
             "email" => $user->getEmail(),
