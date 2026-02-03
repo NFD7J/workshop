@@ -16,7 +16,7 @@
 
         <ul class="header-center nav-links">
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="#events">Events</a></li>
+            <li><a href="index.php?controller=workshop">Events</a></li>
         </ul>
         <ul class="header-right nav-links">
             <?php if(!isset($_SESSION["user"])): ?>
