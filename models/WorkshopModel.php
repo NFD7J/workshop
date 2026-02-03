@@ -14,9 +14,10 @@ class WorkshopModel extends Dbconnect
     {
         $nb_categories = count($_POST['category']);
         $sql ="";
-        for($i=0; $i<$nb_categories-1; $i++){
+        for($i=1; $i<$nb_categories; $i++){
             $sql .= " OR category_id = :category_id".$i;
         }
+        var_dump($sql);
         $this->request = $this->connection->prepare("SELECT * FROM workshops WHERE category_id = :category_id0".$sql);
         for($i=0; $i<$nb_categories; $i++){
             $this->request->bindValue(':category_id'.$i, $_POST['category'][$i]);

@@ -22,13 +22,16 @@
     .events-grid {
         max-width: 1100px;
         margin: auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 30px;
     }
 
     .event-card {
         background: white;
+        max-width: 45%;
+        min-width: 400px;
         border-radius: 18px;
         overflow: hidden;
         box-shadow: 0 15px 40px rgba(0,0,0,0.08);

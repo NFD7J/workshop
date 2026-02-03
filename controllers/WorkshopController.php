@@ -9,7 +9,6 @@ class WorkshopController extends Controller
         
         $categories = $workshop->getCategories();
         if(isset($_POST['category'])){
-
             $workshops = $workshop->getAllWorkshopsFiltered();
         }else{
             $workshops = $workshop->getAllWorkshops();
