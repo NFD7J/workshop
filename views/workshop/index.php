@@ -155,4 +155,8 @@
         font-weight: 600;
     }
 
+    .onclick{
+        text-decoration: none;
+        color: inherit;
+    }
 </style>

@@ -25,11 +25,38 @@ class WorkshopModel extends Dbconnect
         $this->request->execute();
         return $this->request->fetchAll();
     }
+
+    public function getWorkshop($id)
+    {
+        $this->request = $this->connection->prepare("SELECT * FROM workshops WHERE workshops_id = :id");
+        $this->request->execute([':id' => $id]);
+        $workshop = $this->request->fetch();
+        $workshop->available = $this->AvailableSeats($workshop->capacity, $id);
+        return $workshop;
+    }
+
     public function getCategories()
     {
         $this->request = $this->connection->prepare("SELECT * FROM category");
         $this->request->execute();
         return $this->request->fetchAll();
+    }
+
+    public function booking($id)
+    {
+        $this->request = $this->connection->prepare("INSERT INTO reservations (workshops_id, user_id) VALUES (:id, :user_id)");
+        $this->request->execute([
+            ':id' => $id,
+            ':user_id' => $_SESSION['user']->user_id
+        ]);
+    }
+
+    private function AvailableSeats($capacity, $id)
+    {
+        $this->request = $this->connection->prepare("SELECT COUNT(*) as available FROM reservations WHERE workshops_id = :id");
+        $this->request->execute([':id' => $id]);
+        $result = $this->request->fetch();
+        return $capacity - $result->available;
     }
 }
 

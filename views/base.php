@@ -45,8 +45,18 @@
 </html>
 <style>
 
+    html,body {
+        height: 100%;
+    }
+    
     body {
         font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1;
     }
     
     .navbar{
@@ -108,6 +118,7 @@
         color: #64748b;
         font-size: 0.9rem;
         box-shadow: 0 -8px 30px rgba(0,0,0,0.05);
+        bottom: 0;
     }
 
     
