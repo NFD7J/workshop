@@ -26,12 +26,20 @@ class WorkshopController extends Controller
     public function booking($get)
     {
         $id = intval($get['id']);
+        
         if(!isset($_SESSION['user'])){
-            header('Location: index.php?controller=auth&action=login');
+            header('Location: index.php?controller=workshop&action=show&id='.$id);
         }else{
-            $workshopModel = new WorkshopModel();
-            $workshopModel->booking($id);
-            $this->render('workshop/booking_confirmation', ['workshop_id' => $id]);
+            if(isset($_POST['true'])){
+                $workshopModel = new WorkshopModel();
+                $workshopModel->booking($id);
+                header('Location: index.php?controller=workshop&action=show&id='.$id);
+            }elseif(isset($_POST['false'])){
+                header('Location: index.php?controller=workshop&action=show&id='.$id);
+            }else{
+                $this->render('workshop/booking');
+                return;
+            }
         }
     }
 }

@@ -17,7 +17,6 @@ class WorkshopModel extends Dbconnect
         for($i=1; $i<$nb_categories; $i++){
             $sql .= " OR category_id = :category_id".$i;
         }
-        var_dump($sql);
         $this->request = $this->connection->prepare("SELECT * FROM workshops WHERE category_id = :category_id0".$sql);
         for($i=0; $i<$nb_categories; $i++){
             $this->request->bindValue(':category_id'.$i, $_POST['category'][$i]);
@@ -44,10 +43,11 @@ class WorkshopModel extends Dbconnect
 
     public function booking($id)
     {
+        var_dump($_SESSION);
         $this->request = $this->connection->prepare("INSERT INTO reservations (workshops_id, user_id) VALUES (:id, :user_id)");
         $this->request->execute([
             ':id' => $id,
-            ':user_id' => $_SESSION['user']->user_id
+            ':user_id' => $_SESSION['user']['id']
         ]);
     }
 

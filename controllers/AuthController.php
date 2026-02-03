@@ -20,9 +20,9 @@ class AuthController extends Controller
                 if($role !== false){
                     $_SESSION["user"] = [
                         "email" => $_POST["email"],
-                        "role" => $role->id_role,
-                        "name" => $role->nom,
-                        "id" => $role->id_user
+                        "role" => $role->roles_id,
+                        "name" => $role->name,
+                        "id" => $role->user_id
                     ];
                     header("location: index.php");
                 }else{
