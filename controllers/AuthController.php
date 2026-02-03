@@ -59,7 +59,7 @@ class AuthController extends Controller
                 $user = new User();
                 $user->setName($_POST["name"]);
                 $user->setEmail($_POST["email"]);
-                $user->setPassword($_POST["password"]);
+                $user->setPassword(password_hash($_POST["password"], PASSWORD_DEFAULT));
                 $user->setRole("2");
 
                 $authModel = new AuthModel();

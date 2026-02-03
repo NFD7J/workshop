@@ -130,7 +130,7 @@
                     <span>👥 <?php echo $event->capacity; ?> seats</span>
                 </div>
 
-                <a href="#" class="btn">Book now</a>
+                <a href="index.php?controller=workshop&action=show&id=<?= $event->workshops_id ?>" class="btn">Book now</a>
             </div>
         </article>
         <?php endforeach; ?>

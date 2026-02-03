@@ -7,13 +7,12 @@ class AuthModel extends Dbconnect
 {
     public function login(User $user)
     {
-        $this->request = $this->connection->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
+        $this->request = $this->connection->prepare("SELECT * FROM users WHERE email = :email");
         $this->request->execute([
-            "email" => $user->getEmail(),
-            "password" => $user->getPassword()
+            "email" => $user->getEmail()
         ]);
         $isconnected = $this->request->fetch();
-        if($isconnected !== NULL){
+        if($isconnected && password_verify($user->getPassword(), $isconnected->password)){
             return $isconnected;
         }else{
             return false;
