@@ -17,6 +17,9 @@
         <ul class="header-center nav-links">
             <li><a href="index.php">Accueil</a></li>
             <li><a href="index.php?controller=workshop">Events</a></li>
+            <?php if(isset($_SESSION["user"])): ?>
+                <li><a href="index.php?controller=reservation">Réservation</a></li>
+            <?php endif; ?>
         </ul>
         <ul class="header-right nav-links">
             <?php if(!isset($_SESSION["user"])): ?>

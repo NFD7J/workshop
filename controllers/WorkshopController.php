@@ -33,7 +33,7 @@ class WorkshopController extends Controller
             if(isset($_POST['true'])){
                 $workshopModel = new WorkshopModel();
                 $workshopModel->booking($id);
-                header('Location: index.php?controller=workshop&action=show&id='.$id);
+                header('Location: index.php?controller=reservation');
             }elseif(isset($_POST['false'])){
                 header('Location: index.php?controller=workshop&action=show&id='.$id);
             }else{
