@@ -19,6 +19,9 @@
             <li><a href="index.php?controller=workshop">Events</a></li>
             <?php if(isset($_SESSION["user"])): ?>
                 <li><a href="index.php?controller=reservation">Réservation</a></li>
+                <?php if($_SESSION["user"]['role'] === 1): ?>
+                    <li><a href="index.php?controller=admin">Administration</a></li>
+                <?php endif; ?>
             <?php endif; ?>
         </ul>
         <ul class="header-right nav-links">
