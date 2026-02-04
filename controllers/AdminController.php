@@ -121,6 +121,57 @@ class AdminController extends Controller
             $this->render("admin/reservationDelete", ['id' => $id]);
         }   
     }
+
+    /********* categories *********/
+    public function category()
+    {
+        $categoriesModel = new AdminModel();
+        $categories = $categoriesModel->getAllCategories();
+        $this->render('admin/category', ['categories' => $categories]);
+    }
+
+    public function addCategory()
+    {
+        if(isset($_POST['title'])) {
+            if(!empty($_POST['title'])) {
+                
+                $categoriesModel = new AdminModel();
+                $categoriesModel->addCategory(htmlspecialchars($_POST['title']));
+                header('Location: index.php?controller=admin&action=category');
+                exit();
+            }else{
+                header('Location: index.php?controller=admin&action=addCategory');
+                exit();
+            }
+        }else{
+            $this->render('admin/categoryAdd');
+        }
+    }
+
+    public function editCategory($get)
+    {
+        
+        if(isset($_POST['title'], $_POST['id'])) {
+            $id = $_POST['id'];
+            if(!empty($_POST['title'])) {
+                
+                $categoriesModel = new AdminModel();
+                $categoriesModel->editCategory($id, htmlspecialchars($_POST['title']));
+                
+                header('Location: index.php?controller=admin&action=category');
+                exit();
+            }else{
+
+                header('Location: index.php?controller=admin&action=editCategory&id=' . $id);
+                exit();
+            }
+        } else {
+            $id = $get['id'];
+            $categoriesModel = new AdminModel();
+            $category = $categoriesModel->getCategory($id);
+            $this->render('admin/categoryEdit', ['category' => $category]);
+        }
+    }
 }
 
 ?>

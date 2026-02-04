@@ -1,51 +1,20 @@
-<?php $title = "Ajouter un événement" ?>
-<a href="index.php?controller=admin" class="back-btn">← Retour</a>
+<?php $title = "Ajouter une catégorie" ?>
+<a href="index.php?controller=admin&action=category" class="back-btn">← Retour</a>
 <nav class="submenu">
     <ul>
         <li><a href="index.php?controller=admin">Ateliers</a></li>
         <li><a href="index.php?controller=admin&action=reservation">Réservations</a></li>
-        <li><a href="index.php?controller=admin&action=category">Catégories</a></li>
+        <li><a href="index.php?controller=admin&action=category" class="active">Catégories</a></li>
     </ul>
 </nav>
 <section class="add-event">
-    <h2>Ajouter un événement</h2>
-    <form action="index.php?controller=admin&action=addWorkshop" method="POST">
+    <h2>Ajouter une catégorie</h2>
+    <form action="index.php?controller=admin&action=addCategory" method="POST">
         <div class="form-group">
-            <label for="title">Titre :</label>
+            <label for="title">Nom de la catégorie :</label>
             <input type="text" id="title" name="title" required>
         </div>
-
-        <div class="form-group">
-            <label for="description">Description :</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="datetime">Date et heure :</label>
-            <input type="datetime-local" id="datetime" name="datetime" required>
-        </div>
-
-        <div class="form-group">
-            <label for="category">Catégorie :</label>
-            <select id="category" name="category" required>
-                <option value="">-- Sélectionnez une catégorie --</option>
-                <?php foreach ($categories as $category): ?>
-                    <option value="<?= htmlspecialchars($category->category_id) ?>"><?= htmlspecialchars($category->libelle) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="capacity">Capacité :</label>
-            <input type="number" id="capacity" name="capacity" min="1" required>
-        </div>
-
-        <div class="form-group">
-            <label for="image">Image :</label>
-            <input type="file" id="image" name="image">
-        </div>
-
-        <button type="submit" class="btn-submit">Ajouter l'événement</button>
+        <button type="submit" class="btn-submit">Ajouter la catégorie</button>
     </form>
 </section>
 <style>

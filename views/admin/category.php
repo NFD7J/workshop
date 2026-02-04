@@ -1,38 +1,28 @@
-<?php $title = "Réservations" ?>
+<?php $title = "Gestion des catégories" ?>
 <!-- Menu secondaire -->
 <nav class="submenu">
     <ul>
         <li><a href="index.php?controller=admin">Ateliers</a></li>
-        <li><a href="index.php?controller=admin&action=reservation" class="active">Réservations</a></li>
-        <li><a href="index.php?controller=admin&action=category">Catégories</a></li>
+        <li><a href="index.php?controller=admin&action=reservation">Réservations</a></li>
+        <li><a href="index.php?controller=admin&action=category" class="active">Catégories</a></li>
     </ul>
 </nav>
-<section class="activity-list">
-    <h2>Les réservations</h2>
+<section class="activity-list" style="position: relative;">
+    <h2>Liste des catégories</h2>
+    <a href="index.php?controller=admin&action=addCategory" class="btn-nav" style="text-decoration: none; position: absolute; right: 0; top: 0;">+ Ajouter</a>
     <ul>
-
-        <?php foreach ($reservations as $reservation): ?>
-            <a href="index.php?controller=admin&action=deleteReservation&id=<?= $reservation->reservations_id ?>" style="text-decoration: none; color: inherit;">
-                <li class="activity-item <?= $reservation->date >= date('Y-m-d') ? 'upcoming' : 'past' ?>">
-                    <div class="activity-title"><?= $reservation->title ?></div>
-                    <div class="activity-info">
-                        <span>Nom : <?= $reservation->name ?></span>
-                        <span>Email : <?= $reservation->email ?></span>
-                    </div>
-                    <div class="activity-date">
-                        <span>📅 <?= date('d/m/Y', strtotime($reservation->date)) ?></span>
-                        <span>⏰ <?= date('H:i', strtotime($reservation->date)) ?></span>
-                        <span class="status">
-                            <?= $reservation->date >= date('Y-m-d') ? 'À venir' : 'Passée' ?>
-                        </span>
-                    </div>
-                </li>
-            </a>
+        <?php foreach($categories as $category): ?>
+        <a href="index.php?controller=admin&action=editCategory&id=<?= $category->category_id ?>" style="text-decoration: none; color: inherit;">
+            <li class="activity-item">
+                <span class="activity-title"><?= $category->libelle ?></span>
+                <span class="activity-info"><?= $category->workshops_count ?> ateliers</span>
+            </li>
+        </a>
         <?php endforeach; ?>
-
     </ul>
 </section>
 <style>
+
     .submenu {
         display: flex;
         justify-content: center;
@@ -65,7 +55,7 @@
     }
 
     .activity-list {
-        max-width: 1000px;
+        max-width: 500px;
         margin: 40px auto;
         padding: 0 20px;
     }
@@ -109,24 +99,6 @@
         color: #555;
         display: flex;
         gap: 15px;
-    }
-
-
-    .status {
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 600;
-    }
-
-    .upcoming .status {
-        background: #e0e7ff;
-        color: #4338ca;
-    }
-
-    .past .status {
-        background: #f1f5f9;
-        color: #64748b;
     }
 
 </style>

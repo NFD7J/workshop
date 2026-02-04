@@ -6,11 +6,14 @@
         <?php foreach($workshops as $workshop): ?>
         <a href="index.php?controller=workshop&action=show&id=<?= $workshop->workshops_id ?>" class="onclick">
             <li class="list-item">
-                <div>
+                <div class="item-image">
+                    <img src="../views/images/<?= $workshop->image ?>" alt="<?= $workshop->title ?>">
+                </div>
+                <div class="item-content">
                     <h3><?= $workshop->title ?></h3>
                     <p><?= $workshop->description ?></p>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;">
+                <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;" class="item-meta">
                     <span class="meta">📅 <?= date("d/m/Y", strtotime($workshop->date)) ?></span>
                     <span class="meta"><?= date("H\hi", strtotime($workshop->date)) ?></span>
                     <span class="meta">👥 <?= $workshop->capacity ?> seats <br>👥 <?= $workshop->capacity_left ?> left</span>
@@ -44,7 +47,7 @@
 
 <style>
     .events-list {
-        max-width: 900px;
+        max-width: 1100px;
         margin: 80px auto;
         padding: 0 20px;
     }
@@ -63,11 +66,12 @@
     }
 
     .list-item {
+        max-height: 180px;
         cursor: pointer;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 20px 25px;
+        gap: 20px;
+        padding: 0 25px 0 0;
         background: white;
         border-radius: 12px;
         margin-bottom: 15px;
@@ -93,8 +97,32 @@
         overflow: hidden;
     }
 
-    .list-item>div:first-child {
-        padding-right: 2em;
+    .item-image{
+        height: 100%;
+        width: 20%;
+        border-radius: 8px 0 0 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .item-image img {
+        height: 180px;
+        border-radius: 8px 0 0 8px;
+        object-fit: cover;
+        object-position: center;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    .item-content {
+        flex: 1;
+    }
+
+    .item-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
     }
 
     .meta {
@@ -105,7 +133,7 @@
 /*aside*/
     .sidebar {
         position: fixed;
-        top: 100px;
+        top: 200px;
         width: 160px;
         background: white;
         padding: 25px;

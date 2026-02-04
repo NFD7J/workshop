@@ -1,8 +1,10 @@
 <?php $title = "Modifier un événement" ?>
+<a href="index.php?controller=admin" class="back-btn">← Retour</a>
 <nav class="submenu">
     <ul>
         <li><a href="index.php?controller=admin">Ateliers</a></li>
         <li><a href="index.php?controller=admin&action=reservation">Réservations</a></li>
+        <li><a href="index.php?controller=admin&action=category">Catégories</a></li>
     </ul>
 </nav>
 <section class="add-event">
@@ -160,6 +162,28 @@
     }
     .btn-danger:hover {
         background-color: #c53030;
+    }
+
+    .back-btn {
+        display: inline-flex;
+        align-items: center;
+        position: absolute;
+        top: 120px;
+        left: 20px;
+        padding: 8px 14px;
+        background: #f3f4f6;
+        color: #2563eb;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .back-btn:hover {
+        background: #cdcdcd;
+        color: white;
+        box-shadow: 0 4px 12px rgba(163, 163, 163, 0.3);
     }
 
 </style>

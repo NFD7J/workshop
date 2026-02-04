@@ -4,6 +4,7 @@
     <ul>
         <li><a href="index.php?controller=admin" class="active">Ateliers</a></li>
         <li><a href="index.php?controller=admin&action=reservation">Réservations</a></li>
+        <li><a href="index.php?controller=admin&action=category">Catégories</a></li>
     </ul>
 </nav>
 <section class="activity-list" style="position: relative;">

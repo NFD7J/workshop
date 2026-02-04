@@ -1,5 +1,5 @@
-<?php $title = "Ajouter un événement" ?>
-<a href="index.php?controller=admin" class="back-btn">← Retour</a>
+<?php $title = "Modifier un événement" ?>
+<a href="index.php?controller=admin&action=category" class="back-btn">← Retour</a>
 <nav class="submenu">
     <ul>
         <li><a href="index.php?controller=admin">Ateliers</a></li>
@@ -8,44 +8,17 @@
     </ul>
 </nav>
 <section class="add-event">
-    <h2>Ajouter un événement</h2>
-    <form action="index.php?controller=admin&action=addWorkshop" method="POST">
+    <h2>Modifier une catégorie</h2>
+    <?php if($category->workshops_count === 0): ?>
+        <a href="index.php?controller=admin&action=deleteCategory&id=<?= $category->category_id ?>" class="btn-danger">Supprimer</a>
+    <?php endif; ?>
+    <form action="index.php?controller=admin&action=editCategory&id=<?= $category->category_id ?>" method="POST">
         <div class="form-group">
-            <label for="title">Titre :</label>
-            <input type="text" id="title" name="title" required>
+            <label for="title">Nom de la catégorie :</label>
+            <input type="text" id="title" name="title" required value="<?= $category->libelle ?>">
         </div>
-
-        <div class="form-group">
-            <label for="description">Description :</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="datetime">Date et heure :</label>
-            <input type="datetime-local" id="datetime" name="datetime" required>
-        </div>
-
-        <div class="form-group">
-            <label for="category">Catégorie :</label>
-            <select id="category" name="category" required>
-                <option value="">-- Sélectionnez une catégorie --</option>
-                <?php foreach ($categories as $category): ?>
-                    <option value="<?= htmlspecialchars($category->category_id) ?>"><?= htmlspecialchars($category->libelle) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="capacity">Capacité :</label>
-            <input type="number" id="capacity" name="capacity" min="1" required>
-        </div>
-
-        <div class="form-group">
-            <label for="image">Image :</label>
-            <input type="file" id="image" name="image">
-        </div>
-
-        <button type="submit" class="btn-submit">Ajouter l'événement</button>
+        <input type="hidden" name="id" value="<?= $category->category_id ?>">
+        <button type="submit" class="btn-submit">Modifier la catégorie</button>
     </form>
 </section>
 <style>
@@ -81,6 +54,7 @@
     }
     
     .add-event {
+        position: relative;
         max-width: 600px;
         margin: 40px auto;
         padding: 20px;
@@ -140,6 +114,24 @@
 
     .btn-submit:hover {
         opacity: 0.9;
+    }
+
+    .btn-danger {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background-color: #e53e3e;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+    .btn-danger:hover {
+        background-color: #c53030;
     }
 
     .back-btn {
