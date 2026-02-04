@@ -1,4 +1,4 @@
-<?php $title = "Delete Workshop" ?>
+<?php $title = "Delete Reservation" ?>
 <style>
     .logout-alert {
         max-width: 400px;
@@ -61,7 +61,7 @@
     }
 </style>
 <div role="alert" class="logout-alert">
-    <p>Voulez-vous supprimer cet atelier ?</p>
+    <p>Voulez-vous supprimer cette réservation ?</p>
     <form action="#" method="POST" class="logout-form">
         <input type="hidden" name="id" value="<?= $id ?>">
         <input type="submit" name="true" value="OUI" class="btn-oui">

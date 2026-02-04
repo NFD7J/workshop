@@ -106,8 +106,22 @@ class AdminController extends Controller
     public function reservation()
     {
         $reservationsModel = new AdminModel();
-        $reservations = $reservationsModel->getReservations();
+        $reservations = $reservationsModel->getAllReservations();
         $this->render('admin/reservations', ['reservations' => $reservations]);
+    }
+
+    public function deleteReservation($get)
+    {
+        $id = $get['id'];
+        if(isset($_POST["true"])){
+            $reservationModel = new AdminModel();
+            $reservationModel->deleteReservation($_POST['id']);
+            header("location: index.php?controller=admin&action=reservation");
+        }elseif(isset($_POST["false"])){
+            header("location: index.php?controller=admin&action=reservation");
+        }else{
+            $this->render("admin/reservationDelete", ['id' => $id]);
+        }   
     }
 }
 

@@ -62,11 +62,18 @@ class AdminModel extends Dbconnect
     }
 
     /********* reservations *********/
-    public function getReservations()
+    public function getAllReservations()
     {
-        $this->request = $this->connection->prepare("SELECT * FROM reservations");
+        $this->request = $this->connection->prepare("SELECT r.reservations_id,u.name,u.email,w.* FROM reservations r LEFT JOIN users u ON r.user_id = u.user_id JOIN workshops w ON r.workshops_id = w.workshops_id");
         $this->request->execute();
         return $this->request->fetchAll();
+    }
+
+    public function deleteReservation($id)
+    {
+        $this->request = $this->connection->prepare("DELETE FROM reservations WHERE reservations_id = :id");
+        $this->request->bindValue(':id', $id);
+        return $this->request->execute();
     }
 }
 

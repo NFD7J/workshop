@@ -128,6 +128,7 @@
                 <div class="event-info">
                     <span>📅 <?php echo $event->date; ?></span>
                     <span>👥 <?php echo $event->capacity; ?> seats</span>
+                    <span>👥 <?php echo $event->capacity_left; ?> left</span>
                 </div>
 
                 <a href="index.php?controller=workshop&action=show&id=<?= $event->workshops_id ?>" class="btn">Book now</a>

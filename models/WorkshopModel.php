@@ -6,7 +6,7 @@ class WorkshopModel extends Dbconnect
 {
     public function getAllWorkshops()
     {
-        $this->request = $this->connection->prepare("SELECT * FROM workshops");
+        $this->request = $this->connection->prepare("SELECT w.*,w.capacity-COUNT(r.reservations_id) as capacity_left FROM workshops w LEFT JOIN reservations r ON w.workshops_id = r.workshops_id GROUP BY w.workshops_id");
         $this->request->execute();
         return $this->request->fetchAll();
     }
@@ -17,7 +17,7 @@ class WorkshopModel extends Dbconnect
         for($i=1; $i<$nb_categories; $i++){
             $sql .= " OR category_id = :category_id".$i;
         }
-        $this->request = $this->connection->prepare("SELECT * FROM workshops WHERE category_id = :category_id0".$sql);
+        $this->request = $this->connection->prepare("SELECT w.*,w.capacity-COUNT(r.reservations_id) as capacity_left FROM workshops w LEFT JOIN reservations r ON w.workshops_id = r.workshops_id WHERE category_id = :category_id0".$sql." GROUP BY w.workshops_id");
         for($i=0; $i<$nb_categories; $i++){
             $this->request->bindValue(':category_id'.$i, $_POST['category'][$i]);
         }
@@ -27,10 +27,9 @@ class WorkshopModel extends Dbconnect
 
     public function getWorkshop($id)
     {
-        $this->request = $this->connection->prepare("SELECT * FROM workshops WHERE workshops_id = :id");
+        $this->request = $this->connection->prepare("SELECT w.*,w.capacity-COUNT(r.reservations_id) as capacity_left FROM workshops w LEFT JOIN reservations r ON w.workshops_id = r.workshops_id WHERE w.workshops_id = :id GROUP BY w.workshops_id");
         $this->request->execute([':id' => $id]);
         $workshop = $this->request->fetch();
-        $workshop->available = $this->AvailableSeats($workshop->capacity, $id);
         return $workshop;
     }
 
@@ -50,14 +49,7 @@ class WorkshopModel extends Dbconnect
             ':user_id' => $_SESSION['user']['id']
         ]);
     }
-
-    private function AvailableSeats($capacity, $id)
-    {
-        $this->request = $this->connection->prepare("SELECT COUNT(*) as available FROM reservations WHERE workshops_id = :id");
-        $this->request->execute([':id' => $id]);
-        $result = $this->request->fetch();
-        return $capacity - $result->available;
-    }
+    
 }
 
 ?>

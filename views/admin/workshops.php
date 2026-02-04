@@ -2,8 +2,8 @@
 <!-- Menu secondaire -->
 <nav class="submenu">
     <ul>
-        <li><a href="index.php?controller=admin" class="<?= (empty($_GET["action"])) ? "active" : "" ?>">Ateliers</a></li>
-        <li><a href="index.php?controller=admin&action=reservation" class="<?= (!empty($_GET["action"]) && $_GET["action"] === "reservation") ? "active" : "" ?>">Réservations</a></li>
+        <li><a href="index.php?controller=admin" class="active">Ateliers</a></li>
+        <li><a href="index.php?controller=admin&action=reservation">Réservations</a></li>
     </ul>
 </nav>
 <section class="activity-list" style="position: relative;">
