@@ -17,6 +17,11 @@ class ReservationModel extends Dbconnect
         $this->request->execute(['user_id' => $userId]);
         return $this->request->fetchAll();
     }
+    public function deleteReservation($id)
+    {
+        $this->request = $this->connection->prepare("DELETE FROM reservations WHERE reservations_id = :id");
+        $this->request->execute(['id' => $id]);
+    }
 }
 
 ?>

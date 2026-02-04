@@ -15,6 +15,9 @@
                         <span class="status">Upcoming</span>
                     </li>
                 </a>
+                <div style="display: flex; justify-content: flex-end;">
+                    <a href="index.php?controller=reservation&action=delete&id=<?= $reservation->reservations_id ?>" class="onclick btn-annuler">Annuler</a>
+                </div>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -60,6 +63,7 @@
 
     .reservation-list {
         list-style: none;
+        padding: 0;
     }
 
     .reservation-item {
@@ -67,9 +71,9 @@
         justify-content: space-between;
         align-items: center;
         background: white;
+        margin-bottom: 5px;
         padding: 20px 25px;
         border-radius: 12px;
-        margin-bottom: 15px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         transition: transform 0.2s ease;
     }
@@ -104,6 +108,21 @@
     .onclick{
         text-decoration: none;
         color: inherit;
+        display: block;
     }
 
+    .btn-annuler{
+        display: inline-block;
+        padding: 8px 16px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        background: #ef4444;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .btn-annuler:hover{
+        background: #dc2626;
+    }
+    
 </style>

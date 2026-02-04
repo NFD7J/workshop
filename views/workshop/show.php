@@ -11,7 +11,7 @@
         <div class="activity-meta">
             <span>📅 <?= date("j F Y", strtotime($workshop->date)) ?></span>
             <span>⏰ <?= date("H\hi", strtotime($workshop->date)) ?></span>
-            <span>👥 <?= $workshop->capacity ?> seats</span>
+            <span>👥 <?= $workshop->capacity_left ?> seats</span>
         </div>
 
         <p class="activity-description">

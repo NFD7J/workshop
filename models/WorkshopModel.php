@@ -30,6 +30,7 @@ class WorkshopModel extends Dbconnect
         $this->request = $this->connection->prepare("SELECT w.*,w.capacity-COUNT(r.reservations_id) as capacity_left FROM workshops w LEFT JOIN reservations r ON w.workshops_id = r.workshops_id WHERE w.workshops_id = :id GROUP BY w.workshops_id");
         $this->request->execute([':id' => $id]);
         $workshop = $this->request->fetch();
+        $workshop->available = $this->available($id);
         return $workshop;
     }
 
@@ -48,6 +49,13 @@ class WorkshopModel extends Dbconnect
             ':id' => $id,
             ':user_id' => $_SESSION['user']['id']
         ]);
+    }
+    private function available($id)
+    {
+        $this->request = $this->connection->prepare("SELECT w.capacity-COUNT(r.reservations_id) as capacity_left FROM workshops w LEFT JOIN reservations r ON w.workshops_id = r.workshops_id WHERE w.workshops_id = :id GROUP BY w.workshops_id");
+        $this->request->execute([':id' => $id]);
+        $seats = $this->request->fetch();
+        return $seats->capacity_left;
     }
     
 }
