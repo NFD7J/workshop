@@ -11,7 +11,7 @@
     <a href="index.php?controller=admin&action=addWorkshop" class="btn-nav" style="text-decoration: none; position: absolute; right: 0; top: 0;">+ Ajouter</a>
     <ul>
         <?php foreach($workshops as $workshop): ?>
-        <a href="index.php?controller=admin&action=edit&id=<?= $workshop->workshop_id ?>" style="text-decoration: none; color: inherit;">
+        <a href="index.php?controller=admin&action=editWorkshop&id=<?= $workshop->workshops_id ?>" style="text-decoration: none; color: inherit;">
             <li class="activity-item">
                 <span class="activity-title"><?= $workshop->title ?></span>
                 <span class="activity-info">

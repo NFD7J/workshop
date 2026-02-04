@@ -7,7 +7,7 @@
 </nav>
 <section class="add-event">
     <h2>Ajouter un événement</h2>
-    <form action="index.php?controller=workshop&action=create" method="POST">
+    <form action="index.php?controller=admin&action=addWorkshop" method="POST">
         <div class="form-group">
             <label for="title">Titre :</label>
             <input type="text" id="title" name="title" required>
@@ -27,16 +27,20 @@
             <label for="category">Catégorie :</label>
             <select id="category" name="category" required>
                 <option value="">-- Sélectionnez une catégorie --</option>
-                <option value="atelier">Atelier</option>
-                <option value="conférence">Conférence</option>
-                <option value="visite">Visite</option>
-                <option value="autre">Autre</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= htmlspecialchars($category->category_id) ?>"><?= htmlspecialchars($category->libelle) ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
 
         <div class="form-group">
             <label for="capacity">Capacité :</label>
             <input type="number" id="capacity" name="capacity" min="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image :</label>
+            <input type="file" id="image" name="image">
         </div>
 
         <button type="submit" class="btn-submit">Ajouter l'événement</button>
