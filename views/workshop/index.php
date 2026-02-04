@@ -13,7 +13,7 @@
                 <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;">
                     <span class="meta">📅 <?= date("d/m/Y", strtotime($workshop->date)) ?></span>
                     <span class="meta"><?= date("H\hi", strtotime($workshop->date)) ?></span>
-                    <span class="meta">👥 <?= $workshop->capacity ?> seats</span>
+                    <span class="meta">👥 <?= $workshop->capacity ?> seats <br>👥 <?= $workshop->capacity_left ?> left</span>
                 </div>
             </li>
         </a>

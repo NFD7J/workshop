@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <label for="description">Description :</label>
-            <textarea id="description" name="description" rows="4" required><?= $workshop->description ?></textarea>
+            <textarea id="description" name="description" rows="6" required><?= $workshop->description ?></textarea>
         </div>
 
         <div class="form-group">

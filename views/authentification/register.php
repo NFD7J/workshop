@@ -121,3 +121,73 @@
     </form>
 
 </section>
+<script>
+    const password = document.getElementById('password');
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+
+    let passwordTimeout;
+
+    password.addEventListener('input', function () {
+        clearTimeout(passwordTimeout);
+
+        passwordTimeout = setTimeout(() => {
+            if (password.value.length < 6) {
+                password.style.borderColor = 'red';
+                errorMessage(
+                    'Le mot de passe doit contenir au moins 6 caractères.',
+                    password
+                );
+            } else {
+                password.style.borderColor = '#ccc';
+                clearErrors(password);
+            }
+        }, 1000);
+    });
+
+    name.addEventListener('input', function() {
+        clearTimeout(passwordTimeout);
+
+        passwordTimeout = setTimeout(() => {
+            if (name.value.trim() === '') {
+                name.style.borderColor = 'red';
+                errorMessage('Le nom ne peut pas être vide.', name);
+            } else {
+                name.style.borderColor = '#ccc';
+                clearErrors(name);
+            }
+        }, 1000);
+    });
+    
+    email.addEventListener('input', function() {
+        clearTimeout(passwordTimeout);
+
+        passwordTimeout = setTimeout(() => {
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!email.value.match(emailPattern)) {
+                email.style.borderColor = 'red';
+                errorMessage('Veuillez entrer une adresse email valide.', email);
+            } else {
+                email.style.borderColor = '#ccc';
+                clearErrors(email);
+            }
+        }, 1000);
+    });
+
+    function errorMessage(message, field) {
+        if(!field.previousElementSibling || !field.previousElementSibling.classList.contains('error-message')) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = 'red';
+            errorDiv.style.marginBottom = '16px';
+            errorDiv.textContent = message;
+            field.parentNode.insertBefore(errorDiv, field);
+        }
+    }
+
+    function clearErrors(field) {
+        if(field.previousElementSibling && field.previousElementSibling.classList.contains('error-message')) {
+            field.previousElementSibling.remove();
+        }
+    }
+</script>

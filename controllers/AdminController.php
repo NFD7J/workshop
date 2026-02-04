@@ -36,7 +36,6 @@ class AdminController extends Controller
                 header('Location: index.php?controller=admin');
                 exit();
             }else{
-                $_SESSION['error'] = "Veuillez remplir tous les champs.";
                 header('Location: index.php?controller=admin&action=addWorkshop');
                 exit();
             }
@@ -75,7 +74,6 @@ class AdminController extends Controller
                 exit();
             }else{
 
-                $_SESSION['error'] = "Veuillez remplir tous les champs.";
                 header('Location: index.php?controller=admin&action=editWorkshop&id=' . $id);
                 exit();
             }

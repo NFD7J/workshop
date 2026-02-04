@@ -6,20 +6,19 @@
         <li><a href="index.php?controller=admin&action=reservation" class="active">Réservations</a></li>
     </ul>
 </nav>
-<section class="reservations">
+<section class="activity-list">
     <h2>Les réservations</h2>
-    <a href="index.php?controller=admin&action=addReservation" class="btn-nav" style="text-decoration: none; position: absolute; right: 20px; top: 0;">+ Ajouter</a>
-    <ul class="reservation-list">
+    <ul>
 
         <?php foreach ($reservations as $reservation): ?>
             <a href="index.php?controller=admin&action=deleteReservation&id=<?= $reservation->reservations_id ?>" style="text-decoration: none; color: inherit;">
-                <li class="reservation <?= $reservation->date >= date('Y-m-d') ? 'upcoming' : 'past' ?>">
-                    <div class="reservation-title"><?= $reservation->title ?></div>
-                    <div class="reservation-info">
+                <li class="activity-item <?= $reservation->date >= date('Y-m-d') ? 'upcoming' : 'past' ?>">
+                    <div class="activity-title"><?= $reservation->title ?></div>
+                    <div class="activity-info">
                         <span>Nom : <?= $reservation->name ?></span>
                         <span>Email : <?= $reservation->email ?></span>
                     </div>
-                    <div class="reservation-date">
+                    <div class="activity-date">
                         <span>📅 <?= date('d/m/Y', strtotime($reservation->date)) ?></span>
                         <span>⏰ <?= date('H:i', strtotime($reservation->date)) ?></span>
                         <span class="status">
@@ -63,59 +62,54 @@
     .submenu a.active {
         border-bottom: 3px solid #4f46e5;
     }
-    .reservations {
-        position: relative;
-        max-width: 900px;
-        margin: 60px auto;
+
+    .activity-list {
+        max-width: 1000px;
+        margin: 40px auto;
         padding: 0 20px;
     }
 
-    .reservations h2 {
-        font-size: 2rem;
-        margin-bottom: 30px;
+    .activity-list h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #333;
     }
 
-    .reservation-list {
+    .activity-list ul {
         list-style: none;
         padding: 0;
         margin: 0;
     }
 
-    .reservation {
+    .activity-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 18px 24px;
-        margin-bottom: 15px;
-        background: white;
-        border-radius: 14px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        padding: 15px 20px;
+        border-radius: 12px;
+        background: #f9f9f9;
+        margin-bottom: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .reservation:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+    .activity-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.08);
     }
 
-    .reservation-title {
+    .activity-title {
         font-weight: 600;
-        font-size: 1.1rem;
+        color: #333;
     }
 
-    .reservation-info {
-        display: flex;
-        gap: 20px;
+    .activity-info {
+        font-size: 0.9rem;
         color: #555;
-        font-size: 0.95rem;
+        display: flex;
+        gap: 15px;
     }
 
-    .reservation-date {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.90rem;
-    }
 
     .status {
         padding: 6px 14px;
@@ -124,12 +118,12 @@
         font-weight: 600;
     }
 
-    .reservation.upcoming .status {
+    .upcoming .status {
         background: #e0e7ff;
         color: #4338ca;
     }
 
-    .reservation.past .status {
+    .past .status {
         background: #f1f5f9;
         color: #64748b;
     }

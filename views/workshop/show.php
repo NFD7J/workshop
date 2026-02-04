@@ -1,4 +1,5 @@
 <?php $title = "Workshop Details" ?>
+<a href="index.php?controller=workshop" class="back-btn">← Retour</a>
 <section class="activity">
 
     <div class="activity-image">
@@ -79,6 +80,28 @@
         color: white;
         text-decoration: none;
         font-weight: 600;
+    }
+
+    .back-btn {
+        display: inline-flex;
+        align-items: center;
+        position: absolute;
+        top: 100px;
+        left: 20px;
+        padding: 8px 14px;
+        background: #f3f4f6;
+        color: #2563eb;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .back-btn:hover {
+        background: #cdcdcd;
+        color: white;
+        box-shadow: 0 4px 12px rgba(163, 163, 163, 0.3);
     }
 
 </style>

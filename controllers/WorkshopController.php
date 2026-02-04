@@ -28,7 +28,7 @@ class WorkshopController extends Controller
         $id = intval($get['id']);
         
         if(!isset($_SESSION['user'])){
-            header('Location: index.php?controller=workshop&action=show&id='.$id);
+            header('Location: index.php?controller=auth');
         }else{
             if(isset($_POST['true'])){
                 $workshopModel = new WorkshopModel();

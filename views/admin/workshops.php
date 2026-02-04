@@ -17,6 +17,8 @@
                 <span class="activity-info">
                     📅 <?= date('j F Y', strtotime($workshop->date)) ?>  
                     ⏰ <?= date('H\hi', strtotime($workshop->date)) ?>  
+                </span>
+                <span class="activity-date">
                     👥 <?= $workshop->capacity_left ?> /
                     <?= $workshop->capacity ?> restantes
                 </span>
@@ -59,7 +61,7 @@
     }
 
     .activity-list {
-        max-width: 800px;
+        max-width: 1000px;
         margin: 40px auto;
         padding: 0 20px;
     }
