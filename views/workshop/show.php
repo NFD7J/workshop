@@ -28,7 +28,7 @@
         max-width: 1100px;
         margin: 80px auto;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         gap: 50px;
         padding: 0 20px;
     }

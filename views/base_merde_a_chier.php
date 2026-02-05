@@ -14,34 +14,14 @@
     <nav class="navbar">
         <a href="index.php" class="header-left"><div class="logo">Eventify</div></a>
 
-        <ul class="header-center nav-links">
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="index.php?controller=workshop">Events</a></li>
-            <?php if(isset($_SESSION["user"])): ?>
-                <li><a href="index.php?controller=reservation">Réservation</a></li>
-                <?php if($_SESSION["user"]['role'] === 1): ?>
-                    <li><a href="index.php?controller=admin">Administration</a></li>
-                <?php endif; ?>
-            <?php endif; ?>
-        </ul>
-
-        <ul class="header-right nav-links">
-            <?php if(!isset($_SESSION["user"])): ?>
-                <li><a href="index.php?controller=auth">Login</a></li>
-                <li><a href="index.php?controller=auth&action=register" class="btn-nav">Register</a></li>
-            <?php else: ?>
-                <li><a href="index.php?controller=auth&action=logout" class="btn-nav">Logout</a></li>
-            <?php endif; ?>
-        </ul>
-
-        <button class="burger">
+        <button class="burger-menu" aria-label="Menu" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
-        <div class="menu-burger">
-            <ul>
+        <div class="nav-container">
+            <ul class="header-center nav-links">
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="index.php?controller=workshop">Events</a></li>
                 <?php if(isset($_SESSION["user"])): ?>
@@ -50,16 +30,17 @@
                         <li><a href="index.php?controller=admin">Administration</a></li>
                     <?php endif; ?>
                 <?php endif; ?>
+            </ul>
 
+            <ul class="header-right nav-links">
                 <?php if(!isset($_SESSION["user"])): ?>
                     <li><a href="index.php?controller=auth">Login</a></li>
-                    <li><a href="index.php?controller=auth&action=register">Register</a></li>
+                    <li><a href="index.php?controller=auth&action=register" class="btn-nav">Register</a></li>
                 <?php else: ?>
-                    <li><a href="index.php?controller=auth&action=logout">Logout</a></li>
+                    <li><a href="index.php?controller=auth&action=logout" class="btn-nav">Logout</a></li>
                 <?php endif; ?>
             </ul>
         </div>
-
     </nav>
 
 </header>
@@ -74,14 +55,6 @@
 </footer>
 
 
-<script>
-    const burger = document.querySelector(".burger");
-    const navbar = document.querySelector(".menu-burger");
-
-    burger.addEventListener("click", () => {
-        navbar.classList.toggle("active");
-    });
-</script>
 
 </body>
 </html>
@@ -163,87 +136,130 @@
         bottom: 0;
     }
 
-/* ===== BURGER ===== */
-    .menu-burger {
-        display: none;
-    }
-
-    .burger {
+    /* Menu Burger */
+    .burger-menu {
         display: none;
         flex-direction: column;
         gap: 5px;
         background: none;
         border: none;
         cursor: pointer;
+        padding: 5px;
+        z-index: 1001;
     }
 
-    .burger span {
+    .burger-menu span {
         width: 25px;
         height: 3px;
-        background: #333;
-        border-radius: 2px;
+        background-color: #333;
+        border-radius: 3px;
+        transition: all 0.3s ease;
     }
 
-    .active{
-        display: flex !important;
+    .burger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
     }
 
-    /* ===== MOBILE ===== */
-    @media (max-width: 700px) {
+    .burger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
 
-        .burger {
+    .burger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .burger-menu {
             display: flex;
         }
 
-        .menu-burger {
+        .nav-container {
             position: fixed;
-            top: 50px;
-            left: 0;
-            width: 100%;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100vh;
             background: white;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            padding: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .menu-burger ul {
-            width: 100%;
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
+            padding-top: 80px;
         }
 
-        .menu-burger ul li {
-            width: 100%;
-            text-align: center;
-        }
-
-        .menu-burger ul li a {
-            display: block;
-            width: 100%;
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
-            padding: 30px 0;
-        }
-
-        .menu-burger ul li a:hover {
-            color: #4f46e5;
+        .nav-container.active {
+            right: 0;
         }
 
         .nav-links {
-            display: none;
+            flex-direction: column;
+            gap: 0;
+            width: 100%;
         }
 
-        .btn-nav:hover {
-            color: #4f46e5 !important;
+        .header-center {
+            border-bottom: 1px solid #f0f0f0;
         }
 
-    } 
+        .nav-links li {
+            width: 100%;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 15px 25px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .nav-links a:hover {
+            background: #f8f9fa;
+        }
+
+        .btn-nav {
+            border-radius: 0 !important;
+        }
+    }
+
+    
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navContainer = document.querySelector('.nav-container');
+
+        burgerMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navContainer.classList.toggle('active');
+            
+            // Update aria-expanded for accessibility
+            const isExpanded = this.classList.contains('active');
+            this.setAttribute('aria-expanded', isExpanded);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.navbar')) {
+                burgerMenu.classList.remove('active');
+                navContainer.classList.remove('active');
+                burgerMenu.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                burgerMenu.classList.remove('active');
+                navContainer.classList.remove('active');
+                burgerMenu.setAttribute('aria-expanded', 'false');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

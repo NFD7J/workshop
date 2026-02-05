@@ -1,4 +1,23 @@
 <?php $title = "All Workshops & Events" ?>
+<aside class="sidebar">
+    <h3>Filter by category</h3>
+
+    <ul class="filters">
+        <form action="index.php?controller=workshop&action=index" method="post" class="formulaire">
+            <?php foreach($categories as $category): ?>
+                <li>
+                    <label>
+                        <input type="checkbox" name="category[]" value="<?= $category->category_id ?>" <?php if(isset($_POST['category']) && in_array($category->category_id, $_POST['category'])) echo 'checked'; ?>>
+                        <?= $category->libelle ?>
+                    </label>
+                </li>
+            <?php endforeach; ?>
+            <div class="div-btn">
+                <input type="submit" class="btn" value="rechercher">
+            </div>
+        </form>
+    </ul>
+</aside>
 <section class="events-list">
     <h2>All Workshops & Events</h2>
 
@@ -24,31 +43,10 @@
     </ul>
 </section>
 
-<aside class="sidebar">
-    <h3>Filter by category</h3>
-
-    <ul class="filters">
-        <form action="index.php?controller=workshop&action=index" method="post">
-            <div class="div-btn">
-                <input type="submit" class="btn" value="rechercher">
-            </div>
-        <?php foreach($categories as $category): ?>
-            <li>
-                <label>
-                    <input type="checkbox" name="category[]" value="<?= $category->category_id ?>" <?php if(isset($_POST['category']) && in_array($category->category_id, $_POST['category'])) echo 'checked'; ?>>
-                    <?= $category->libelle ?>
-                </label>
-            </li>
-        <?php endforeach; ?>
-        </form>
-    </ul>
-</aside>
-
-
 <style>
     .events-list {
         max-width: 1100px;
-        margin: 80px auto;
+        margin: auto;
         padding: 0 20px;
     }
 
@@ -132,46 +130,55 @@
     }
 /*aside*/
     .sidebar {
-        position: fixed;
-        top: 200px;
-        width: 160px;
+        position: relative;
+        width: 50%;
+        margin: 20px auto;
+        text-align: center;
         background: white;
-        padding: 25px;
+        padding: 0 25px 25px 25px;
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
 
     .sidebar h3 {
         font-size: 1.1rem;
-        margin-bottom: 20px;
+        margin: 0;
+        margin-bottom: 0.5em;
+        padding-top: 10px;
+    }
+
+    .formulaire{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
     }
 
     .filters {
         list-style: none;
         padding: 0;
+        margin: 0;
     }
 
     .filters li {
-        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
     }
 
     .filters label {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 2px;
         color: #475569;
         cursor: pointer;
     }
 
     .filters input[type="checkbox"] {
         accent-color: #4f46e5;
+        cursor: pointer;
     }
-    .div-btn{
-        width: 100%;
-        display: flex;
-        justify-content: end;
-        margin: 1em 0;
-    }
+
     .btn {
         cursor: pointer;
         padding: 9px;
