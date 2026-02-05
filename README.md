@@ -36,7 +36,7 @@ https://localhost/phpmyadmin
 
 
 4. Créez une base de données nommée :  
-workshops  
+workshop  
 
 
 
