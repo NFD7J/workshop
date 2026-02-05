@@ -40,7 +40,7 @@ workshop
 
 
 
-5. Sélectionnez la base de données **workshops**, puis :
+5. Sélectionnez la base de données **workshop**, puis :
 - Allez dans l’onglet **Importer**
 - Importez le fichier `exemple.sql` présent dans le dépôt
 - Lancez l’importation
