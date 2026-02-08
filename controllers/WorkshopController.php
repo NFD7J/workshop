@@ -15,6 +15,7 @@ class WorkshopController extends Controller
         }
         $this->render('workshop/index', ['workshops' => $workshops, 'categories' => $categories]);
     }
+    
     public function show($get)
     {
         $id = intval($get['id']);
