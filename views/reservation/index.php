@@ -16,7 +16,7 @@
                     </li>
                 </a>
                 <div style="display: flex; justify-content: flex-end;">
-                    <a href="index.php?controller=reservation&action=delete&id=<?= $reservation->reservations_id ?>" class="onclick btn-annuler">Annuler</a>
+                    <a href="index.php?controller=reservation&action=delete&id=<?= $reservation->reservations_id ?>" class="onclick btn-annuler">Annuler réservation</a>
                 </div>
             <?php endforeach; ?>
         </ul>

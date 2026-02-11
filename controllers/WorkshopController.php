@@ -6,13 +6,17 @@ class WorkshopController extends Controller
     public function index()
     {
         $workshop = new WorkshopModel();
-        
         $categories = $workshop->getCategories();
-        if(isset($_POST['category'])){
-            $workshops = $workshop->getAllWorkshopsFiltered();
-        }else{
-            $workshops = $workshop->getAllWorkshops();
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if(isset($_POST['category']) && count($_POST['category']) > 0){
+                $workshops = $workshop->getAllWorkshopsFiltered($_POST['category']);
+            }else{
+                $workshops = $workshop->getAllWorkshops();
+            }
+            echo json_encode($workshops);
+            exit;
         }
+        $workshops = $workshop->getAllWorkshops();
         $this->render('workshop/index', ['workshops' => $workshops, 'categories' => $categories]);
     }
     public function show($get)
