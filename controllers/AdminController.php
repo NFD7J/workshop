@@ -130,17 +130,24 @@ class AdminController extends Controller
         $this->render('admin/category', ['categories' => $categories]);
     }
 
+    public function getCategory($get)
+    {
+        $id = $get['id'];
+        $categoriesModel = new AdminModel();
+        $category = $categoriesModel->getCategory($id);
+        echo json_encode($category);
+    }
+
     public function addCategory()
     {
         if(isset($_POST['title'])) {
             if(!empty($_POST['title'])) {
                 
                 $categoriesModel = new AdminModel();
-                $categoriesModel->addCategory(htmlspecialchars($_POST['title']));
-                header('Location: index.php?controller=admin&action=category');
-                exit();
+                $id = $categoriesModel->addCategory(htmlspecialchars($_POST['title']));
+                echo json_encode(['category' => $id]);
             }else{
-                header('Location: index.php?controller=admin&action=addCategory');
+                header('Location: index.php?controller=admin&action=category');
                 exit();
             }
         }else{
@@ -157,13 +164,10 @@ class AdminController extends Controller
                 
                 $categoriesModel = new AdminModel();
                 $categoriesModel->editCategory($id, htmlspecialchars($_POST['title']));
+                echo json_encode(['category_id' => $id, 'libelle' => htmlspecialchars($_POST['title'])]);
                 
-                header('Location: index.php?controller=admin&action=category');
-                exit();
             }else{
 
-                header('Location: index.php?controller=admin&action=editCategory&id=' . $id);
-                exit();
             }
         } else {
             $id = $get['id'];
@@ -171,6 +175,21 @@ class AdminController extends Controller
             $category = $categoriesModel->getCategory($id);
             $this->render('admin/categoryEdit', ['category' => $category]);
         }
+    }
+
+    public function deleteCategory($get)
+    {
+        $id = $get['id'];
+        if(isset($_POST["true"])){
+            $categoryModel = new AdminModel();
+            $categoryModel->deleteCategory($id);
+            header("location: index.php?controller=admin&action=category");
+        }elseif(isset($_POST["false"])){
+            header("location: index.php?controller=admin&action=category");
+        }else{
+            $this->render("admin/categoryDelete", ['id' => $id]);
+        }   
+
     }
 }
 

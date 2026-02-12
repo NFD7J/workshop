@@ -11,20 +11,13 @@ class ReservationController extends Controller
         $pastReservations = $reservationsModel->getPastReservations($_SESSION['user']['id']);
         $this->render('reservation/index', ['reservations' => $reservations, 'pastReservations' => $pastReservations]);
     }
-    public function delete($get)
+    public function delete()
     {
-        $id = $get['id'];
-        if (isset($_POST['true'])) {
-            $reservationModel = new ReservationModel();
-            $reservationModel->deleteReservation($_POST['id']);
-            header('Location: index.php?controller=reservation');
-            exit();
-        } elseif (isset($_POST['false'])) {
-            header('Location: index.php?controller=reservation');
-            exit();
-        }else{
-            $this->render('reservation/delete', ['id' => $id]);
-        }
+        $id = $_POST['id'];
+        $reservationModel = new ReservationModel();
+        $reservationModel->deleteReservation($id);
+        $json = ["id" => $id];
+        echo json_encode($json);
     }
 }
 

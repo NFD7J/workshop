@@ -84,13 +84,6 @@ class AdminModel extends Dbconnect
         return $this->request->fetchAll();
     }
 
-    public function addCategory($libelle)
-    {
-        $this->request = $this->connection->prepare("INSERT INTO category (libelle) VALUES (:libelle)");
-        $this->request->bindValue(':libelle', $libelle);
-        return $this->request->execute();
-    }
-
     public function getCategory($id)
     {
         $this->request = $this->connection->prepare("SELECT c.*, COUNT(w.workshops_id) as workshops_count FROM category c LEFT JOIN workshops w ON c.category_id = w.category_id WHERE c.category_id = :id GROUP BY c.category_id");
@@ -99,11 +92,26 @@ class AdminModel extends Dbconnect
         return $this->request->fetch();
     }
 
+    public function addCategory($libelle)
+    {
+        $this->request = $this->connection->prepare("INSERT INTO category (libelle) VALUES (:libelle)");
+        $this->request->bindValue(':libelle', $libelle);
+        $this->request->execute();
+        return $this->getCategory($this->connection->lastInsertId());
+    }
+
     public function editCategory($id, $libelle)
     {
         $this->request = $this->connection->prepare("UPDATE category SET libelle = :libelle WHERE category_id = :id");
         $this->request->bindValue(':libelle', $libelle);
         $this->request->bindValue(':id', $id);
+        return $this->request->execute();
+    }
+
+    public function deleteCategory($id)
+    { 
+        $this->request = $this->connection->prepare("DELETE FROM category WHERE category_id = :id"); 
+        $this->request->bindValue(':id', $id); 
         return $this->request->execute();
     }
 }
