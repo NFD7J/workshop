@@ -199,37 +199,37 @@
 
 <!-- JS -->
 <script>
-const formFilters = document.querySelector('.formulaire');
-const container = document.querySelector('.list');
-formFilters.addEventListener('input', () => {
-    container.innerHTML = '';
-    fetch('index.php?controller=workshop&action=index', {
-        method: 'POST',
-        body: new FormData(formFilters)
-    })
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(workshop => {
-            let card = document.createElement('a');
-            card.href = "index.php?controller=workshop&action=show&id=" + workshop.workshops_id;
-            card.classList.add('onclick');
-            card.innerHTML = `
-            <li class="list-item">
-                <div class="item-image">
-                    <img src="../views/images/${workshop.image}" alt="${workshop.title}">
-                </div>
-                <div class="item-content">
-                    <h3>${workshop.title}</h3>
-                    <p>${workshop.description}</p>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;" class="item-meta">
-                    <span class="meta">📅 ${new Date(workshop.date).toLocaleDateString()}</span>
-                    <span class="meta">${new Date(workshop.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                    <span class="meta">👥 ${workshop.capacity} seats <br>👥 ${workshop.capacity_left} left</span>
-                </div>
-            </li>`;
-            container.appendChild(card);
-        });
-    })
-});
+    const formFilters = document.querySelector('.formulaire');
+    const container = document.querySelector('.list');
+    formFilters.addEventListener('input', () => {
+        container.innerHTML = '';
+        fetch('index.php?controller=workshop&action=index', {
+            method: 'POST',
+            body: new FormData(formFilters)
+        })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(workshop => {
+                let card = document.createElement('a');
+                card.href = "index.php?controller=workshop&action=show&id=" + workshop.workshops_id;
+                card.classList.add('onclick');
+                card.innerHTML = `
+                <li class="list-item">
+                    <div class="item-image">
+                        <img src="../views/images/${workshop.image}" alt="${workshop.title}">
+                    </div>
+                    <div class="item-content">
+                        <h3>${workshop.title}</h3>
+                        <p>${workshop.description}</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;" class="item-meta">
+                        <span class="meta">📅 ${new Date(workshop.date).toLocaleDateString()}</span>
+                        <span class="meta">${new Date(workshop.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        <span class="meta">👥 ${workshop.capacity} seats <br>👥 ${workshop.capacity_left} left</span>
+                    </div>
+                </li>`;
+                container.appendChild(card);
+            });
+        })
+    });
 </script>

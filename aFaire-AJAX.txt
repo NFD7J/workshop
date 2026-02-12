@@ -1,0 +1,3 @@
+- affichage modification avec données correspondantes, comment afficher les categories dans le select
+- gerer la modification en back
+- gérer la modification en front 

@@ -20,10 +20,15 @@ class WorkshopModel extends Dbconnect
         for($i=1; $i<$nb_categories; $i++){
             $sql .= " OR category_id = :category_id".$i;
         }
-        $this->request = $this->connection->prepare("SELECT w.*,w.capacity-COUNT(r.reservations_id) as capacity_left FROM workshops w LEFT JOIN reservations r ON w.workshops_id = r.workshops_id WHERE category_id = :category_id0".$sql." GROUP BY w.workshops_id");
+        $this->request = $this->connection->prepare("
+        SELECT w.*,w.capacity-COUNT(r.reservations_id) as capacity_left 
+        FROM workshops w LEFT JOIN reservations r ON w.workshops_id = r.workshops_id 
+        WHERE category_id = :category_id0".$sql." GROUP BY w.workshops_id");
+
         for($i=0; $i<$nb_categories; $i++){
             $this->request->bindValue(':category_id'.$i, $categories[$i]);
         }
+        
         $this->request->execute();
         return $this->request->fetchAll();
     }

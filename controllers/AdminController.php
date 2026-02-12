@@ -82,7 +82,7 @@ class AdminController extends Controller
             $workshopsModel = new AdminModel();
             $workshop = $workshopsModel->getWorkshop($id);
             $categories = $workshopsModel->getCategories();
-            $this->render('admin/workshopEdit', ['workshop' => $workshop, 'categories' => $categories]);
+            echo json_encode(['workshop' => $workshop, 'categories' => $categories]);
         }
     }
 
