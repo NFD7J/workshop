@@ -6,7 +6,7 @@ use App\models\AuthModel;
 class AuthController extends Controller
 {
 
-    public function index()
+    public function login()
     {
         isset($_SESSION["user"]) ? header("location: index.php") : "";
         if(isset($_POST["email"]) && isset($_POST["password"])){
@@ -25,14 +25,16 @@ class AuthController extends Controller
                         "id" => $role->user_id
                     ];
                     header("location: index.php");
-                }else{
-                    $error = "Email ou mot de passe incorrect";
-                    $this->render("authentification/login", ["error" => $error]);
+                    exit();
+                }else{ 
+                    $error = "Email ou mot de passe incorrect"; 
                 }
-            }else{
-                $error = "Tous les champs doivent être remplis";
-                $this->render("authentification/login", ["error" => $error]);
+            }else{ 
+                $error = "Tous les champs doivent être remplis"; 
             }
+
+            $this->render("authentification/login", ["error" => $error]);
+
         }else{
             $this->render('authentification/login');
         }
